@@ -69,17 +69,10 @@ const root = {
   deletePhonebook: async ({id}) => {
     try {
         //const input = await models.Phonebook.findOne({ where: { id } })
-        // const user = await models.User.destroy({ where: { id },
-        //     returning: true,
-        //     plain: true,
-        //     raw: true 
-        // })
+        const user = await models.User.destroy({ where: { id } })
 
-        const user = await models.Phonebook.findOne({ where: { id } })
-        .then((result) => {
-             return models.Phonebook.destroy({ where: { id } })
-                       .then((u) => {return result});
-         });
+        // const user = await models.Phonebook.destroy({ where: { id } })
+        //     .then((u) => {return result});
         console.log('ini delete',user)
         return user;
     } catch (err) {
@@ -115,10 +108,8 @@ mutation {
   }
 }
 mutation {
-  deletePhonebook(id: 5) {
-    id
-    name
-    phone
+  deletePhonebook(id: 13) {
+  __typename
   }
 }
 -- query variables delete
