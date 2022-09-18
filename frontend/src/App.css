@@ -1,38 +1,45 @@
-.App {
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container-box {
+  width: 100%;
+  max-width: 1400px;
+  margin: auto;
+  padding: 15px;
+}
+
+.header-phonebook {
+  padding: 35px;
+  margin-bottom: 35px;
+  font-weight: bold;
+  font-size: 35px;
+  border-radius: 5px !important;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.btn-add {
+  margin-bottom: 25px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.input-phonebook {
+  border: 1px solid rgb(211, 211, 211);
+  outline: none;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+    rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+  padding: 6px 10px;
+  border-radius: 5px;
+  margin: 0 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.input-edit-phonebook {
+  margin: 0;
+  padding: 5px 10px;
+  width: 100%;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.form-card {
+  margin-bottom: 28px;
 }
