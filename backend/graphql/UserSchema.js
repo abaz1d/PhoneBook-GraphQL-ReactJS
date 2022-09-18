@@ -1,5 +1,5 @@
 var { buildSchema } = require('graphql');
-var service = require("../services/index")
+var models = require('../models/index');
 
 var schema = buildSchema(`
   input PhonebookInput {
@@ -7,72 +7,122 @@ var schema = buildSchema(`
     phone: String!
   }
 
-  input GetPhonebookInput {
-    name: String!
-    phone: String!
-    limit: Int!
-    offset: Int!
-  }
-
   type Phonebook {
-    id: String!
+    id: Int!
     name: String!
     phone: String!
-  }
-
-  type PhonebookGet {
-    data: [Phonebook]!
-    dataCount: Int
   }
 
   type Query {
-    getPhonebooks(input: GetPhonebookInput): PhonebookGet
+    getPhonebooks: [Phonebook]
   }
 
   type Mutation {
     createPhonebook(input: PhonebookInput): Phonebook
-    updatePhonebook(id: String!, input: PhonebookInput): Phonebook
-    deletePhonebook(id: String!, input: PhonebookInput): Phonebook
+    updatePhonebook(id: Int!, input: PhonebookInput): Phonebook
+    deletePhonebook(id: Int!): Phonebook
   }
 `);
 
 const root = {
-  getPhonebooks: async ({ input }) => {
+  getPhonebooks: async () => {
     try {
-      return await service.getPhonebooks(input)
+        
+      const users = await models.User.findAll({raw: true})
+      //console.log('ini get',users)
+      return users;
     } catch (err) {
       throw err
     }
   },
   createPhonebook: async ({ input }) => {
     try {
-      return await service.createPhonebook(input)
+      //return await service.createPhonebook(input)
+      //const users = await models.User.create({raw: true, input})
+      const user = await models.User.create(input, {raw: true})
+      //console.log('ini tambah',user.map(el => el.get({ plain: true })))
+      return user;
     } catch (err) {
       throw err
     }
   },
-  updatePhonebook: async ({ id, input }) => {
+  updatePhonebook: async ({ id, input}) => {
     try {
-      const data = {
-        id,
-        ...input
-      }
-      return await service.editPhonebook(data)
+        const user = await models.User.update(
+           input
+          , {
+            where: {
+              id
+            },
+            returning: true,
+            plain: true,
+            raw: true
+          })
+        console.log('ini edit',user[1])
+        //return users.map(el => el.get({ plain: true }));
+      return user[1]
+
     } catch (err) {
       throw err
     }
   },
-  deletePhonebook: async ({ id, input }) => {
+  deletePhonebook: async ({id}) => {
     try {
-      const data = {
-        id,
-        ...input
-      }
-      return await service.removePhonebook(data)
+        //const input = await models.Phonebook.findOne({ where: { id } })
+        // const user = await models.User.destroy({ where: { id },
+        //     returning: true,
+        //     plain: true,
+        //     raw: true 
+        // })
+
+        const user = await models.Phonebook.findOne({ where: { id } })
+        .then((result) => {
+             return models.Phonebook.destroy({ where: { id } })
+                       .then((u) => {return result});
+         });
+        console.log('ini delete',user)
+        return user;
     } catch (err) {
       throw err
     }
   }
 };
+
+/*
+{
+  getPhonebooks{
+    id
+    name
+    phone
+  }
+}
+mutation {
+  createPhonebook(input: {
+    name: "Heril",
+    phone: "089012398764"}) {
+    id
+    name
+    phone
+  }
+}
+mutation {
+  updatePhonebook(id: "6", input: {
+    name: "Kheiril",
+    phone: "089012398760"}) {
+    id
+    name
+    phone
+  }
+}
+mutation {
+  deletePhonebook(id: 5) {
+    id
+    name
+    phone
+  }
+}
+-- query variables delete
+{"id": "6305a82f348a5237a12e03ef"}
+*/
 
 module.exports = { schema, root }
