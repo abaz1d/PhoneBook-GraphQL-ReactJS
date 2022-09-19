@@ -2,21 +2,27 @@ import '../App.css';
 import { useQuery } from '@apollo/client';
 import { GET_USERS } from '../utils/queries';
 import PhonebookItem from "./PhonebookItem"
-import { InView } from "react-intersection-observer";
 
 export default function PhonebookTable(props) {
-    const { loading, error, fetchMore, data } = useQuery(GET_USERS, {
+
+    const handleScroll = ({ currentTarget }, loading) => {
+        if (
+          currentTarget.scrollTop + currentTarget.clientHeight >=
+          currentTarget.scrollHeight
+        ) {
+          loading();
+        }
+    };
+
+    const { loading, error, data } = useQuery(GET_USERS, {
         variables: {
             offset: 0,
-            limit: 5
+            limit: 10
         },
     });
 
     if (loading) return <p>Loading...</p>;
     if (error) return `Error! ${error.message}`;
-    if (data) {
-        console.log('data>', data.getPhonebooks.length);
-    }
     // const { phonebooks } = useSelector(state => ({
     //     phonebooks: state.phonebooks
     // }), shallowEqual)
@@ -62,31 +68,17 @@ export default function PhonebookTable(props) {
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
-            <tbody>
-                {data &&
-                    data.getPhonebooks.map((item, index) => <PhonebookItem
-                        key={item.id}
-                        index={index}
-                        id={item.id}
-                        name={item.name}
-                        phone={item.phone}
-                        searchReset={props.searchReset}
-                    />)}
-                {data && (
-                    <InView
-                        onChange={async (inView) => {
-                            const currentLength = data.getPhonebooks.length || 0;
-                            if (inView) {
-                                await fetchMore({
-                                    variables: {
-                                        offset: currentLength,
-                                        limit: currentLength * 2,
-                                    }
-                                })
-                            }
-                        }}
-                    />
-                )}
+            <tbody
+             onScroll={e => handleScroll(e, loading)}
+            >
+                {data.getPhonebooks.map((item, index) => <PhonebookItem
+                    key={item.id}
+                    index={index}
+                    id={item.id}
+                    name={item.name}
+                    phone={item.phone}
+                    searchReset={props.searchReset}
+                />)}
             </tbody>
         </table>
     )

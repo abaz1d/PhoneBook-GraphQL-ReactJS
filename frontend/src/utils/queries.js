@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const GET_USERS = gql`
-{
-  getPhonebooks{
+query getPhonebooks($offset: Int, $limit: Int) {
+  getPhonebooks(offset: $offset, limit: $limit) {
     id
     name
     phone

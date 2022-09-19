@@ -7,6 +7,13 @@ var schema = buildSchema(`
     phone: String!
   }
 
+  input GetPhonebookInput {
+    name: String!
+    phone: String!
+    limit: Int!
+    offset: Int!
+  }
+
   type Phonebook {
     id: Int!
     name: String!
@@ -14,7 +21,7 @@ var schema = buildSchema(`
   }
 
   type Query {
-    getPhonebooks: [Phonebook]
+    getPhonebooks(offset: Int, limit: Int): [Phonebook]
   }
 
   type Mutation {
@@ -25,10 +32,11 @@ var schema = buildSchema(`
 `);
 
 const root = {
-  getPhonebooks: async () => {
+  getPhonebooks: async ({offset, limit}) => {
     try {
         
-      const users = await models.User.findAll({raw: true})
+      const users = await models.User.findAll({ offset: offset, limit: limit, raw: true})
+      //const users = await models.User.findAll({raw: true})
       //console.log('ini get',users)
       return users;
     } catch (err) {
@@ -83,7 +91,7 @@ const root = {
 
 /*
 {
-  getPhonebooks{
+  getPhonebooks(offset: $offset, limit: $limit) {
     id
     name
     phone
