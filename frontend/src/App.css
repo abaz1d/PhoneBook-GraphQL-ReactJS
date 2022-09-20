@@ -20,6 +20,15 @@ body {
   text-align: center;
 }
 
+.header-maps {
+  padding: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 35px;
+  border-radius: 5px !important;
+  text-align: center;
+}
+
 .btn-add {
   margin-bottom: 25px;
 }

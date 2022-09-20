@@ -2,7 +2,6 @@ import '../App.css';
 import { ApolloProvider } from '@apollo/client';
 import { graphqlClient } from '../utils/api'
 import PhonebookForm from "../container/PhonebookForm"
-// import PhonebookSearch from "../container/PhonebookSearch"
 import PhonebookTable from "../container/PhonebookTable"
 import React, { useState } from 'react';
 
@@ -56,8 +55,8 @@ export default function PhonebookBox() {
                 <main className="main-phonebook">
                     <div className="phonebook-add-container">
                         {!onAdd && <button type="button" className="btn btn-primary btn-add" onClick={() => addPhonebookClick(true)}>
-                            <i className="fas fa-plus me-2"></i>
-                            add
+                            <i className="fa-solid fa-plus me-2"></i>
+                            Add
                         </button>}
                         {onAdd && <PhonebookForm setOnAdd={addPhonebookClick} searchReset={searchReset} />}
                         <div className="card form-card">
@@ -75,7 +74,16 @@ export default function PhonebookBox() {
                                 </label>
                             </div>
                         </div>
-                        <PhonebookTable searchData={data} searchReset={searchReset} />
+                        <div>
+                            <a className="btn btn-primary btn-add" href={`/map`}>
+                                <i className="fa-solid fa-map-location-dot me-2"></i>
+                                Lokasi Kontak
+                            </a>
+                        </div>
+                        <br />
+                        <div>
+                            <PhonebookTable searchData={data} searchReset={searchReset} />
+                        </div>
                     </div>
                 </main>
             </div>
