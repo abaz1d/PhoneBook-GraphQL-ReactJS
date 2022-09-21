@@ -5,11 +5,17 @@ var schema = buildSchema(`
   input PhonebookInput {
     name: String!
     phone: String!
+    latitude: Float
+    longitude: Float
+    alamat: String
   }
 
   input GetPhonebookInput {
     name: String!
     phone: String!
+    latitude: Float
+    longitude: Float
+    alamat: String
     limit: Int!
     offset: Int!
   }
@@ -18,6 +24,9 @@ var schema = buildSchema(`
     id: Int!
     name: String!
     phone: String!
+    latitude: Float
+    longitude: Float
+    alamat: String
   }
 
   type Query {
@@ -95,15 +104,24 @@ const root = {
     id
     name
     phone
+    latitude
+    longitude
+    alamat
   }
 }
 mutation {
   createPhonebook(input: {
     name: "Heril",
-    phone: "089012398764"}) {
+    phone: "089012398764",
+    latitude: -5.135399,
+    longitude: 119.423790,
+    alamat: "Makasar"}) {
     id
     name
     phone
+    latitude
+    longitude
+    alamat
   }
 }
 mutation {

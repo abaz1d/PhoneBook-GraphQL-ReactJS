@@ -14,80 +14,52 @@ export default function PhonebookTable(props) {
 
     if (loading) return <p>Loading...</p>;
     if (error) return `Error! ${error.message}`;
-    if (data) {
-        console.log('data>', data.getPhonebooks.length);
+    function isiPeta(user) {
+        props.fungsi(user)
     }
-    // const { phonebooks } = useSelector(state => ({
-    //     phonebooks: state.phonebooks
-    // }), shallowEqual)
-
-    // const offsetRef = useRef(0)
-    // const dispatch = useDispatch()
-
-    // useEffect(() => {
-    //     offsetRef.current = 0
-    //     //dispatch(loadPhonebook(props.searchData.name ? props.searchData.name : "", props.searchData.phone ? props.searchData.phone : "", 10, offsetRef.current))
-    // }, [dispatch, props.searchData.name, props.searchData.phone])
-
-    // const handleScroll = useCallback(() => {
-    //     if (document.documentElement.scrollTop + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
-    //         if (offsetRef.current <= (Math.ceil(phonebooks.dataCount / 10) - 1)) {
-    //             offsetRef.current++
-    //             //dispatch(loadMorePhonebook(props.searchData.name ? props.searchData.name : "", props.searchData.phone ? props.searchData.phone : "", 10, offsetRef.current))
-    //         }
-    //     }
-    // }, [dispatch, phonebooks, props.searchData.name, props.searchData.phone])
-
-    // useEffect(() => {
-    //     window.addEventListener('scroll', handleScroll);
-    // }, [handleScroll]);
-
-    // const nodeList = phonebooks?.data?.map((item, index) => (
-    //     <PhonebookItem
-    //         key={item.id}
-    //         index={index}
-    //         id={item.id}
-    //         name={item.name}
-    //         phone={item.phone}
-    //         searchReset={props.searchReset} />
-    // ))
 
     return (
-        <table className="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {data &&
-                    data.getPhonebooks.map((item, index) => <PhonebookItem
-                        key={item.id}
-                        index={index}
-                        id={item.id}
-                        name={item.name}
-                        phone={item.phone}
-                        searchReset={props.searchReset}
-                    />)}
-                {data && (
-                    <InView
-                        onChange={async (inView) => {
-                            const currentLength = data.getPhonebooks.length || 0;
-                            if (inView) {
-                                await fetchMore({
-                                    variables: {
-                                        offset: currentLength,
-                                        limit: currentLength * 2,
-                                    }
-                                })
-                            }
-                        }}
-                    />
-                )}
-            </tbody>
-        </table>
+        <div className="div div-striped">
+
+            <div className="row">
+                <div className="col-md-1"><b>#</b></div>
+                <div className="col"><b>Name</b></div>
+                <div className="col"><b>Phone</b></div>
+                <div className="col"><b>Alamat</b></div>
+                {/* <div className="col"><b>Lat & Long</b></div> */}
+                <div className="col"><b>Actions</b></div>
+            </div>
+            <hr></hr>
+
+            {data &&
+                data.getPhonebooks.map((item, index) => <PhonebookItem
+                    key={item.id}
+                    index={index}
+                    id={item.id}
+                    name={item.name}
+                    phone={item.phone}
+                    latitude={item.latitude}
+                    longitude={item.longitude}
+                    alamat={item.alamat}
+                    searchReset={props.searchReset}
+                    fungsi2={isiPeta}
+                />)}
+            {data && (
+                <InView
+                    onChange={async (inView) => {
+                        const currentLength = data.getPhonebooks.length || 0;
+                        if (inView) {
+                            await fetchMore({
+                                variables: {
+                                    offset: currentLength,
+                                }
+                            })
+                            console.log('fetch')
+                        }
+                    }}
+                />
+            )}
+
+        </div>
     )
 }

@@ -15,7 +15,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init({
     name: DataTypes.STRING,
-    phone: DataTypes.STRING
+    phone: DataTypes.STRING,
+    latitude: DataTypes.FLOAT,
+    longitude: DataTypes.FLOAT,
+    alamat: DataTypes.TEXT
   }, {
     sequelize,
     modelName: 'User',

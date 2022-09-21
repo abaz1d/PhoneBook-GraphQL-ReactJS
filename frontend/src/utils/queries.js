@@ -6,6 +6,9 @@ query getPhonebooks($offset: Int, $limit: Int) {
     id
     name
     phone
+    latitude
+    longitude
+    alamat
   }
 }
 `;
@@ -13,9 +16,12 @@ query getPhonebooks($offset: Int, $limit: Int) {
 export const CREATE_USER = gql`
 mutation createPhonebook($user: PhonebookInput){
    createPhonebook(input: $user) {
-      id
-      name
-      phone
+    id
+    name
+    phone
+    latitude
+    longitude
+    alamat
     }
   }
 `;
@@ -23,9 +29,12 @@ mutation createPhonebook($user: PhonebookInput){
 export const UPDATE_USER = gql`
 mutation updatePhonebook($id: Int!, $user: PhonebookInput){
    updatePhonebook(id: $id, input: $user) {
-      id
-      name
-      phone
+    id
+    name
+    phone
+    latitude
+    longitude
+    alamat
     }
   }
 `;
