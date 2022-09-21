@@ -90,7 +90,7 @@ export default function PhonebookForm(props) {
         event.preventDefault();
         if (user.name !== "" && user.phone !== "") {
             createPhonebook({ variables: { user } });
-            console.log('add', user)
+            // console.log('add', user)
             setUser({
                 name: '',
                 phone: '',

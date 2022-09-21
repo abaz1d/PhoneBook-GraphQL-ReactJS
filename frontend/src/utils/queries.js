@@ -1,14 +1,16 @@
 import { gql } from '@apollo/client';
 
 export const GET_USERS = gql`
-query getPhonebooks($offset: Int, $limit: Int) {
-  getPhonebooks(offset: $offset, limit: $limit) {
+query getPhonebooks($name: String, $alamat: String, $offset: Int, $limit: Int) {
+  getPhonebooks(name: $name, alamat: $alamat, offset: $offset, limit: $limit) {
     id
     name
     phone
     latitude
     longitude
     alamat
+    limit
+    offset
   }
 }
 `;

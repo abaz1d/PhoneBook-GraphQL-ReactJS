@@ -1,18 +1,26 @@
 import '../App.css';
+import React, { useState } from 'react'
 import { useQuery } from '@apollo/client';
 import { GET_USERS } from '../utils/queries';
 import PhonebookItem from "./PhonebookItem"
 import { InView } from "react-intersection-observer";
+import ClipLoader from "react-spinners/ClipLoader";
 
 export default function PhonebookTable(props) {
     const { loading, error, fetchMore, data } = useQuery(GET_USERS, {
         variables: {
+            name: props.searchData.name === undefined ? '' : props.searchData.name,
+            alamat: props.searchData.alamat === undefined ? '' : props.searchData.alamat,
             offset: 0,
-            limit: 5
+            limit: 4
         },
     });
 
-    if (loading) return <p>Loading...</p>;
+    // console.log('data diterima', props.searchData)
+
+    if (loading) return <p>
+        <ClipLoader size={500} />
+    </p>;
     if (error) return `Error! ${error.message}`;
     function isiPeta(user) {
         props.fungsi(user)
@@ -52,6 +60,7 @@ export default function PhonebookTable(props) {
                             await fetchMore({
                                 variables: {
                                     offset: currentLength,
+                                    limit: currentLength + 2
                                 }
                             })
                             console.log('fetch')

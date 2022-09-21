@@ -26,6 +26,16 @@ export default function PhonebookForm(props) {
         lng: markers[0].position.lng,
     }
 
+    const markerDragEnd = (event, index) => {
+        setUser({
+            name: user.name,
+            phone: user.phone,
+            latitude: event.latLng.lat(),
+            longitude: event.latLng.lng(),
+            alamat: user.alamat,
+        })
+    }
+
     const mapClicked = (event) => {
         console.log(event.latLng.lat(), event.latLng.lng())
         setMarkers([{
@@ -35,21 +45,17 @@ export default function PhonebookForm(props) {
             },
         }]);
         setUser({
+            name: user.name,
+            phone: user.phone,
             latitude: event.latLng.lat(),
             longitude: event.latLng.lng(),
+            alamat: user.alamat,
         })
     }
 
     const markerClicked = (marker, index) => {
         setActiveInfoWindow(index)
         console.log(marker, index)
-    }
-
-    const markerDragEnd = (event, index) => {
-        setUser({
-            latitude: event.latLng.lat(),
-            longitude: event.latLng.lng(),
-        })
     }
 
     //=============================================
@@ -93,7 +99,7 @@ export default function PhonebookForm(props) {
         navigate("/"); 
         if (user.name !== "" && user.phone !== "") {
             createPhonebook({ variables: { user } });
-            console.log('add', user)
+            //console.log('add', user)
             setUser({
                 name: '',
                 phone: '',
@@ -103,6 +109,8 @@ export default function PhonebookForm(props) {
             })
         }
     }
+
+    
 
     if (loading) return 'Submitting...';
     if (error) return `Submission error! ${error.message}`;

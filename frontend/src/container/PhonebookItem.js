@@ -1,19 +1,19 @@
 import '../App.css';
 import React, { useState } from "react"
 import { useMutation } from '@apollo/client';
-import { useNavigate } from "react-router-dom";
-import { UPDATE_USER, DELETE_USER, GET_USERS } from "../utils/queries";
+// import { useNavigate } from "react-router-dom";
+import { DELETE_USER, GET_USERS, UPDATE_USER } from "../utils/queries";
 import { GoogleMap, InfoWindowF, LoadScript, MarkerF } from "@react-google-maps/api";
 
 
 export default function PhonebookItem(props) {
-    const [activeInfoWindow, setActiveInfoWindow] = useState("");
-    const navigate = useNavigate();
-    const [updatePhonebook, { loading, error }] = useMutation(UPDATE_USER, {
+
+    const [deletePhonebook, { loading, error }] = useMutation(DELETE_USER, {
         refetchQueries: [{ query: GET_USERS }],
     });
-
-    const [deletePhonebook, { loading1, error1 }] = useMutation(DELETE_USER, {
+    const [activeInfoWindow, setActiveInfoWindow] = useState("");
+    // const navigate = useNavigate();
+    const [updatePhonebook, { loading1, error1 }] = useMutation(UPDATE_USER, {
         refetchQueries: [{ query: GET_USERS }],
     });
 
@@ -68,7 +68,7 @@ export default function PhonebookItem(props) {
     }
     const center = {
         lat: user.latitude,
-        lng:user.longitude,
+        lng: user.longitude,
     }
 
     const mapClicked = (event) => {
@@ -92,8 +92,11 @@ export default function PhonebookItem(props) {
 
     const markerDragEnd = (event, index) => {
         setUser({
+            name: user.name,
+            phone: user.phone,
             latitude: event.latLng.lat(),
             longitude: event.latLng.lng(),
+            alamat: user.alamat,
         })
     }
 

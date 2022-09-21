@@ -73,37 +73,35 @@ export default function PhonebookBox() {
     //=============================================
     const [onAdd, setOnAdd] = useState(false);
     const [name, setName] = useState("");
-    const [phone, setPhone] = useState("");
-    const [alamat, setalamat] = useState("");
+    const [alamat, setAlamat] = useState("");
     const [data, setData] = useState({});
 
     const mapOn = (value) => {
         setOnAdd(value)
     }
-
+    
     const searchReset = () => {
         setData({})
         setName("")
-        setPhone("")
-        setalamat("")
+        setAlamat("")
     }
 
     const enterSearch = (event) => {
         if (event.key === 'Enter') {
             let data = {}
 
-            if (name && phone) {
+            if (name && alamat) {
                 data = {
                     name,
-                    phone
+                    alamat
                 }
-            } else if (!name && !phone) {
+            } else if (!name && !alamat) {
                 data = {}
             } else if (!name) {
                 data = {
-                    phone
+                    alamat
                 }
-            } else if (!phone) {
+            } else if (!alamat) {
                 data = {
                     name
                 }
@@ -158,7 +156,7 @@ export default function PhonebookBox() {
                     </LoadScript>
                 </div>}
                 {onAdd && <a href={`/`} className="btn btn-danger btn-add mb-5" >
-                    <i class="fa-solid fa-xmark"></i>
+                    <i className="fa-solid fa-xmark"></i>
                 </a>}
                 <div className="phonebook-add-container">
                     {/* {!onAdd && <button type="button" className="btn btn-primary btn-add" onClick={() => mapOn(true)}>
@@ -176,12 +174,8 @@ export default function PhonebookBox() {
                                 <input type="text" className="input-phonebook" value={name} onChange={(event) => setName(event.target.value)} onKeyDown={enterSearch} placeholder="Name. . . " />
                             </label>
                             <label className="fw-bold">
-                                Phone
-                                <input type="text" className="input-phonebook" value={phone} onChange={(event) => setPhone(event.target.value)} onKeyDown={enterSearch} placeholder="Phone. . ." />
-                            </label>
-                            <label className="fw-bold">
                                 Alamat
-                                <input type="text" className="input-phonebook" value={alamat} onChange={(event) => setPhone(event.target.value)} onKeyDown={enterSearch} placeholder="Alamat. . ." />
+                                <input type="text" className="input-phonebook" value={alamat} onChange={(event) => setAlamat(event.target.value)} onKeyDown={enterSearch} placeholder="Alamat. . ." />
                             </label>
                         </div>
                     </div>

@@ -1,5 +1,6 @@
 var { buildSchema } = require('graphql');
 var models = require('../models/index');
+const { Sequelize } = require('../models/index');
 
 var schema = buildSchema(`
   input PhonebookInput {
@@ -27,10 +28,13 @@ var schema = buildSchema(`
     latitude: Float
     longitude: Float
     alamat: String
+    limit: Int
+    offset: Int
   }
 
   type Query {
-    getPhonebooks(offset: Int, limit: Int): [Phonebook]
+    getPhonebooks(name: String, alamat: String, offset: Int, limit: Int, name: String, alamat: String): [Phonebook]
+    getFilter(name: String, alamat: String): [Phonebook]
   }
 
   type Mutation {
@@ -41,12 +45,27 @@ var schema = buildSchema(`
 `);
 
 const root = {
-  getPhonebooks: async ({offset, limit}) => {
+  getPhonebooks: async ({name, alamat, offset, limit}) => {
     try {
         
-      const users = await models.User.findAll({ offset: offset, limit: limit, raw: true})
-      //const users = await models.User.findAll({raw: true})
-      //console.log('ini get',users)
+      const users = await models.User.findAll({
+        where: {
+          [Sequelize.Op.and]: [
+            {
+              name: {
+                [Sequelize.Op.iLike]: '%' + name + '%'
+              }
+            },
+            {
+              alamat: {
+                [Sequelize.Op.iLike]: '%' + alamat + '%'
+              }
+            }
+          ]
+        },
+        offset: offset,
+        limit: limit
+      });
       return users;
     } catch (err) {
       throw err
