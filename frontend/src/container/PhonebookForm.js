@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useMutation } from '@apollo/client';
 import { CREATE_USER, GET_USERS } from '../utils/queries';
 import { GoogleMap, InfoWindowF, LoadScript, MarkerF } from "@react-google-maps/api";
+import HashLoader from "react-spinners/HashLoader";
 
 export default function PhonebookForm(props) {
     const [activeInfoWindow, setActiveInfoWindow] = useState("");
@@ -101,7 +102,9 @@ export default function PhonebookForm(props) {
         }
     }
 
-    if (loading) return 'Submitting...';
+    if (loading) return <p className="loading">
+        <HashLoader size={150} />
+    </p>;
     if (error) return `Submission error! ${error.message}`;
 
     return (

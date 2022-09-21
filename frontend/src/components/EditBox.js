@@ -4,6 +4,7 @@ import { useMutation } from '@apollo/client';
 import { UPDATE_USER, GET_USERS } from "../utils/queries";
 import { useNavigate } from "react-router-dom";
 import { GoogleMap, InfoWindowF, LoadScript, MarkerF } from "@react-google-maps/api";
+import HashLoader from "react-spinners/HashLoader";
 
 
 export default function PhonebookItem(props) {
@@ -12,7 +13,7 @@ export default function PhonebookItem(props) {
     const [updatePhonebook, { loading, error }] = useMutation(UPDATE_USER, {
         refetchQueries: [{ query: GET_USERS }],
     });
-   console.log('propsc',props)
+    console.log('propsc', props)
     const [user, setUser] = useState({
         name: props.name,
         phone: props.phone,
@@ -82,8 +83,9 @@ export default function PhonebookItem(props) {
         }
     }
 
-
-    if (loading) return 'Submitting...';
+    if (loading) return <p className="loading">
+        <HashLoader size={150} />
+    </p>;
     if (error) return `Submission error! ${error.message}`;
 
     return (

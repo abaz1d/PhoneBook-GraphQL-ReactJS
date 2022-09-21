@@ -4,6 +4,7 @@ import { useMutation } from '@apollo/client';
 import { CREATE_USER, GET_USERS } from '../utils/queries';
 import { useNavigate } from "react-router-dom";
 import { GoogleMap, InfoWindowF, LoadScript, MarkerF } from "@react-google-maps/api";
+import HashLoader from "react-spinners/HashLoader";
 
 export default function PhonebookForm(props) {
     const [activeInfoWindow, setActiveInfoWindow] = useState("");
@@ -96,7 +97,7 @@ export default function PhonebookForm(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        navigate("/"); 
+        navigate("/");
         if (user.name !== "" && user.phone !== "") {
             createPhonebook({ variables: { user } });
             //console.log('add', user)
@@ -110,9 +111,11 @@ export default function PhonebookForm(props) {
         }
     }
 
-    
 
-    if (loading) return 'Submitting...';
+
+    if (loading) return <p className="loading">
+        <HashLoader size={150} />
+    </p>;
     if (error) return `Submission error! ${error.message}`;
 
     return (
@@ -169,7 +172,7 @@ export default function PhonebookForm(props) {
                                     </label>
                                 </div>
                                 <div className="col-sm-10">
-                                    <input type="text" className="form-control" id="name" name="name" value={user.name} onChange={handleChange} placeholder="Name. . . "  required/>
+                                    <input type="text" className="form-control" id="name" name="name" value={user.name} onChange={handleChange} placeholder="Name. . . " required />
                                 </div>
                             </div>
                             <div className="row mb-3">
@@ -217,7 +220,7 @@ export default function PhonebookForm(props) {
                                     <i className="far fa-check-circle me-2"></i>
                                     Save
                                 </button>
-                                <a  href={`/`} className="btn btn-warning" style={{ "color": "white" }} onClick={() => props.setOnAdd(false)}>
+                                <a href={`/`} className="btn btn-warning" style={{ "color": "white" }} onClick={() => props.setOnAdd(false)}>
                                     <i className="fas fa-ban me-2"></i>
                                     Cancel
                                 </a>

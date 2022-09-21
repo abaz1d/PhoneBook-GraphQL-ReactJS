@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client';
 import { GET_USERS } from '../utils/queries';
 import PhonebookItem from "./PhonebookItem"
 import { InView } from "react-intersection-observer";
-import ClipLoader from "react-spinners/ClipLoader";
+import HashLoader from "react-spinners/HashLoader";
 
 export default function PhonebookTable(props) {
     const { loading, error, fetchMore, data } = useQuery(GET_USERS, {
@@ -12,14 +12,12 @@ export default function PhonebookTable(props) {
             name: props.searchData.name === undefined ? '' : props.searchData.name,
             alamat: props.searchData.alamat === undefined ? '' : props.searchData.alamat,
             offset: 0,
-            limit: 4
+            limit: 10
         },
     });
 
-    // console.log('data diterima', props.searchData)
-
-    if (loading) return <p>
-        <ClipLoader size={500} />
+    if (loading) return <p className="loading">
+        <HashLoader size={150} />
     </p>;
     if (error) return `Error! ${error.message}`;
     function isiPeta(user) {
@@ -63,7 +61,6 @@ export default function PhonebookTable(props) {
                                     limit: currentLength + 2
                                 }
                             })
-                            console.log('fetch')
                         }
                     }}
                 />

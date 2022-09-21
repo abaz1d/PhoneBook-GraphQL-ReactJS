@@ -4,12 +4,20 @@ import { useMutation } from '@apollo/client';
 // import { useNavigate } from "react-router-dom";
 import { DELETE_USER, GET_USERS, UPDATE_USER } from "../utils/queries";
 import { GoogleMap, InfoWindowF, LoadScript, MarkerF } from "@react-google-maps/api";
+import HashLoader from "react-spinners/HashLoader";
 
 
 export default function PhonebookItem(props) {
 
     const [deletePhonebook, { loading, error }] = useMutation(DELETE_USER, {
-        refetchQueries: [{ query: GET_USERS }],
+        refetchQueries: [
+            {
+                query: GET_USERS,
+                //Make sure that variables are the same ones as the ones you used to get GET_USER_CART data. If it is different, it wont work. Check if your variables are the same on useQuery you called before and this query
+                variables: { name: '', alamat: '', offset: 0, limit: 10 },
+                awaitRefetchQueries: true,
+            },
+        ],
     });
     const [activeInfoWindow, setActiveInfoWindow] = useState("");
     // const navigate = useNavigate();
@@ -80,8 +88,11 @@ export default function PhonebookItem(props) {
             },
         }]);
         setUser({
+            name: user.name,
+            phone: user.phone,
             latitude: event.latLng.lat(),
             longitude: event.latLng.lng(),
+            alamat: user.alamat,
         })
     }
 
@@ -104,9 +115,13 @@ export default function PhonebookItem(props) {
     //     console.log('child', user)
     // };
 
-    if (loading) return 'Submitting...';
+    if (loading) return <p className="loading">
+        <HashLoader size={150} />
+    </p>;
     if (error) return `Submission error! ${error.message}`;
-    if (loading1) return 'Submitting...';
+    if (loading1) return <p className="loading">
+        <HashLoader size={150} />
+    </p>;
     if (error1) return `Submission error! ${error.message}`;
 
     if (OnEdit) {
