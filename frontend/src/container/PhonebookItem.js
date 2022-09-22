@@ -110,11 +110,6 @@ export default function PhonebookItem(props) {
             alamat: user.alamat,
         })
     }
-
-    // const sendData = (user) => {
-    //     console.log('child', user)
-    // };
-
     if (loading) return <p className="loading">
         <HashLoader size={150} />
     </p>;
@@ -193,10 +188,6 @@ export default function PhonebookItem(props) {
                             <i className="far fa-check-circle me-2"></i>
                             Save
                         </button>
-                        {/* <button type="submit" className="btn btn-warning me-2" style={{ "color": "white" }} onClick={() => setOnEdit(false)}>
-                            <i className="fas fa-ban me-2"></i>
-                            Cancel
-                        </button> */}
                         <a href={`/`} className="btn btn-warning me-2" style={{ "color": "white" }} >
                             <i className="fas fa-ban me-2"></i>
                             Cancel
@@ -212,9 +203,6 @@ export default function PhonebookItem(props) {
                 <div className="col mb-1" onClick={() => props.fungsi2(user)} style={{ "lineHeight": "35px" }}>{props.name}</div>
                 <div className="col mb-1" style={{ "lineHeight": "35px" }}>{props.phone}</div>
                 <div className="col mb-1" style={{ "lineHeight": "35px" }}>{props.alamat}</div>
-                {/* <div className="col mb-1" style={{ "lineHeight": "35px" }}><small>
-                    {props.latitude}, {props.longitude}
-                </small></div> */}
                 <div className="col mb-1">
                     <button type="submit" className="btn btn-success me-2" onClick={() => { setOnEdit(true) }}>
                         <i className="fas fa-pen me-2"></i>
