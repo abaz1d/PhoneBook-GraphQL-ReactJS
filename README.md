@@ -1,1 +1,1 @@
-# PhoneBook-GraphQL-ReactJS
+# PhoneBook-GraphQL-Sequelize-ReactJS
