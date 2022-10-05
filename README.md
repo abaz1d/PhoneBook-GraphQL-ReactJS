@@ -4,7 +4,7 @@
 
 This is a simple full stack React application which provides a solid starting point for [MongoDB](https://www.mongodb.com/), [ExpressJS](https://expressjs.com/), [ReactJS](https://reactjs.org/) and [NodeJS](https://nodejs.org/en/) based applications. Client side code is written in React and the backend API is written using Express.
 
-Learning management systems help the instructor deliver material to the students, administer tests and other assignments, track student progress, and manage a report.
+A phone book is a book containing the names, addresses, and telephone numbers of telephone subscribers in a particular area. A telephone book publisher is a telecommunications service company or telephone information service provider.
 
 ## Before You Begin
 
@@ -35,22 +35,22 @@ Make sure you have installed all of the following prerequisites on your developm
  - NodeJS
  - ExpressJS
 
-*source files in `server/` folder*
+*source files in `backend/` folder*
 
 ## Quick Start
 
 open terminal to run server,
-*Please make sure your MongoDB is running*
+*Please make sure your PostgreSQL is running*
 
 ```bash
 # Clone the repository
-git clone https://github.com/rubicode/lms
+git clone https://github.com/abaz1d/PhoneBook-GraphQL-ReactJS
 
 # Go inside the directory
-cd lms
+cd PhoneBook-GraphQL-ReactJS
 
 # Install dependencies for server
-cd server && npm install
+cd backend && npm install
 
 # Start server
 npm start
@@ -60,7 +60,7 @@ open new terminal to run client
 
 ```bash
 # Go inside the directory
-cd lms
+cd PhoneBook-GraphQL-ReactJS
 
 # Install dependencies for client
 cd client && npm install
