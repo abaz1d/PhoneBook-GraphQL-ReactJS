@@ -4,7 +4,7 @@
 
 This is a simple full stack React application which provides a solid starting point for [ExpressJS](https://expressjs.com/), [ReactJS](https://reactjs.org/), [NodeJS](https://nodejs.org/en/), and [Sequelize](https://sequelize.org/) based applications. Client side code is written in React and the backend API is written using Express and [GraphQL](https://graphql.org/).
 
-A phone book is a book containing the names, addresses, and telephone numbers of telephone subscribers in a particular area. A telephone book publisher is a telecommunications service company or telephone information service provider.
+A phonebook application is a book that contains names, addresses, and phone numbers of friends or anyone in a certain area. This app is built using React JS.
 
 ## Before You Begin
 
