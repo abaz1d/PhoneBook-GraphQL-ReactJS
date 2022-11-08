@@ -76,6 +76,4 @@ this application should run on port 5173 , you can access it through browser, ju
 
 ### Screenshots Client Web App
 Youtube Video Preview : https://youtu.be/kVTX6w5UnVc <br/>
-<img src="https://user-images.githubusercontent.com/95122515/194019273-58ff8d7e-2161-4619-8caf-a8b59a4a9aac.png" width="49%"> <img src="https://user-images.githubusercontent.com/95122515/194019368-f1f5fb07-b902-43c2-822d-c8a87ef52741.png" width="49%">
-
-
+<img src="https://user-images.githubusercontent.com/95122515/200493784-a3f3f2c5-d327-4f4b-b79a-10284996ab1c.png" width="49%"> <img src="https://user-images.githubusercontent.com/95122515/200493817-513d1a40-33b9-4399-bd14-ce44d4bf4607.png" width="49%">
