@@ -75,5 +75,5 @@ this application should run on port 5173 , you can access it through browser, ju
 [http://localhost:3000/](http://localhost:3000/) for RESTful APIs.
 
 ### Screenshots Client Web App
-Youtube Video Preview : https://youtu.be/kVTX6w5UnVc <br/>
+
 <img src="https://user-images.githubusercontent.com/95122515/200493784-a3f3f2c5-d327-4f4b-b79a-10284996ab1c.png" width="49%"> <img src="https://user-images.githubusercontent.com/95122515/200493817-513d1a40-33b9-4399-bd14-ce44d4bf4607.png" width="49%">
